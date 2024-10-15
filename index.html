@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to October 2025</title>
+
+</head>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #1c1c1c, #454545);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.countdown-container {
+    text-align: center;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.time-box {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.time-box span {
+    font-size: 2.5em;
+    display: block;
+}
+
+.time-box p {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+</style>
+
+<body>
+    <div class="countdown-container">
+        <h1>Countdown to 1st October 2025</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <span id="days">0</span>
+                <p>Days</p>
+            </div>
+            <div class="time-box">
+                <span id="hours">0</span>
+                <p>Hours</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes">0</span>
+                <p>Minutes</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds">0</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+<script>
+// Set the target date
+const targetDate = new Date('October 1, 2025 00:00:00').getTime();
+
+const countdown = setInterval(function() {
+    // Get today's date and time
+    const now = new Date().getTime();
+
+    // Calculate the time difference
+    const difference = targetDate - now;
+
+    // Time calculations for days, hours, minutes, and seconds
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    // Display the result
+    document.getElementById('days').innerHTML = days;
+    document.getElementById('hours').innerHTML = hours;
+    document.getElementById('minutes').innerHTML = minutes;
+    document.getElementById('seconds').innerHTML = seconds;
+
+    // If the countdown is over, display "EXPIRED"
+    if (difference < 0) {
+        clearInterval(countdown);
+        document.querySelector('.countdown').innerHTML = "EXPIRED";
+    }
+}, 1000);
+</script>
+
+</html>
